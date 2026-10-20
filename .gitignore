@@ -1,0 +1,12 @@
+backend/build/
+backend/kbc-backend.exe
+backend/kbc.db
+backend/kbc.db-shm
+backend/kbc.db-wal
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+.DS_Store
+Thumbs.db

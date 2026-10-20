@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100b28">
+  <title>Kaun Banega Coderpati — AI Quiz</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles/main.css?v=lifeline-polish-1">
+</head>
+
+<body data-server-no-reload>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand-mark" href="#" id="home-button" aria-label="KBC AI home">KBC<span> AI</span></a>
+      <div class="top-stats">
+        <div><small>PLAYER</small><strong id="player-label">Guest</strong></div>
+        <div><small>PRIZE</small><strong id="prize-label">₹ 0</strong></div>
+      </div>
+      <div class="header-actions">
+        <button id="history-button" class="secondary-button hidden" type="button">History</button>
+        <button id="recovery-code-button" class="secondary-button hidden" type="button">Recovery Code</button>
+        <button id="sign-out-button" class="secondary-button hidden" type="button">Sign Out</button>
+        <label id="profile-picture-control" class="profile-picture-control hidden" title="Change profile picture">
+          <img id="profile-picture" alt="Profile picture">
+          <svg class="profile-picture-placeholder" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="22" cy="15" r="8" fill="currentColor" />
+            <path d="M5 43c1-10 7-16 17-16s16 6 17 16" fill="currentColor" />
+            <circle cx="37" cy="36" r="10" fill="#ffbd38" />
+            <path d="M37 30v12M31 36h12" fill="none" stroke="#180d2e" stroke-linecap="round" stroke-width="2.5" />
+          </svg>
+          <input id="profile-picture-input" type="file" accept="image/*" aria-label="Upload profile picture">
+        </label>
+        <button id="music-toggle" class="icon-button" type="button" aria-label="Play or pause background music"
+          title="Toggle café ambience">♫</button>
+        <button id="fullscreen-toggle" class="icon-button" type="button" aria-label="Toggle full screen"
+          title="Full screen">⛶</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="auth-screen" class="screen setup-layout">
+        <div class="intro-panel">
+          <p class="eyebrow">PLAYER ACCOUNT</p>
+          <h1>Sign in to<br><span>play.</span></h1>
+          <p class="intro-copy">Create an account to keep your quiz sessions connected to you, or continue with a temporary guest profile.</p>
+        </div>
+
+        <form id="auth-form" class="setup-card" novalidate>
+          <h2 id="auth-title">Welcome back</h2>
+          <div class="auth-mode-switch" role="group" aria-label="Account access">
+            <button id="login-mode-button" class="auth-mode-button active" type="button" aria-pressed="true">Sign In</button>
+            <button id="register-mode-button" class="auth-mode-button" type="button" aria-pressed="false">Create Account</button>
+          </div>
+          <label class="field-label" for="auth-username">Username</label>
+          <input id="auth-username" name="username" autocomplete="username" minlength="3" maxlength="24"
+            aria-describedby="auth-error"
+            placeholder="Choose a username" required>
+
+          <label class="field-label" for="auth-password">Password</label>
+          <input id="auth-password" name="password" type="password" autocomplete="current-password"
+            minlength="8" maxlength="128" aria-describedby="auth-error" placeholder="At least 8 characters" required>
+
+          <div id="password-confirm-group" class="hidden">
+            <label class="field-label" for="auth-password-confirm">Confirm password</label>
+            <input id="auth-password-confirm" name="passwordConfirm" type="password" autocomplete="new-password"
+              minlength="8" maxlength="128" aria-describedby="auth-error" placeholder="Enter your password again" disabled>
+          </div>
+          <p id="auth-error" class="error-message" role="alert"></p>
+          <button id="auth-submit-button" class="primary-button" type="submit">Sign In</button>
+          <button id="show-password-reset" class="text-button" type="button">Forgot password?</button>
+          <div id="password-reset-panel" class="password-reset-panel hidden">
+            <h3>Reset your password</h3>
+            <p>Use the recovery code saved when you created your account.</p>
+            <label class="field-label" for="reset-username">Username</label>
+            <input id="reset-username" autocomplete="username" maxlength="24">
+            <label class="field-label" for="reset-recovery-code">Recovery code</label>
+            <input id="reset-recovery-code" autocomplete="off" maxlength="20" placeholder="20-character code">
+            <label class="field-label" for="reset-new-password">New password</label>
+            <input id="reset-new-password" type="password" autocomplete="new-password" minlength="8" maxlength="128">
+            <button id="reset-password-button" class="secondary-button" type="button">Reset Password</button>
+          </div>
+          <div class="guest-option">
+            <p>Just want to play?</p>
+            <button id="guest-button" class="secondary-button" type="button">Continue as Guest</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="setup-screen" class="screen setup-layout hidden">
+        <div class="intro-panel">
+          <p class="eyebrow">THE AI QUIZ CHALLENGE</p>
+          <h1>Kaun Banega<br><span>Coderpati?</span></h1>
+          <p class="intro-copy">Choose your subjects. Climb the Padavs. Prove what you know.</p>
+          <div class="feature-pills"><span>3 Padavs</span><span>Practice Mode</span><span>Timed quiz</span>
+          </div>
+          <div class="ambience-note"><span class="ambience-dot"></span>
+            <div><strong>Late-night café ambience</strong><small>Toggle the music any time</small></div>
+          </div>
+        </div>
+
+        <form id="setup-form" class="setup-card">
+          <h2>Set up your game</h2>
+          <div class="account-tools">
+            <button id="setup-history-button" class="secondary-button" type="button">View Game History</button>
+            <button id="setup-recovery-button" class="secondary-button" type="button">Show Recovery Code</button>
+          </div>
+          <label class="field-label" for="player-name">Your name</label>
+          <input id="player-name" name="playerName" maxlength="24" placeholder="Enter your name" value="Player 1"
+            required>
+
+          <label class="field-label" for="game-mode">Game mode</label>
+          <select id="game-mode" class="select-input">
+            <option value="kbc">KBC Challenge — 15 questions</option>
+            <option value="practice">Practice — 50 questions, mixed difficulty</option>
+            <option value="endless">Endless Practice — play until you quit</option>
+          </select>
+
+          <div class="subjects-heading">
+            <label class="field-label" for="subject-grid">Choose exactly 5 subjects</label>
+            <span id="subject-count">0 / 5</span>
+          </div>
+          <div id="subject-grid" class="subject-grid">
+            <label class="subject-option"><input type="checkbox" value="C Programming"><span>C
+                Programming</span></label>
+            <label class="subject-option"><input type="checkbox" value="Java"><span>Java</span></label>
+            <label class="subject-option"><input type="checkbox" value="Python"><span>Python</span></label>
+            <label class="subject-option"><input type="checkbox" value="Data Structures"><span>Data
+                Structures</span></label>
+            <label class="subject-option"><input type="checkbox" value="Web Development"><span>Web
+                Development</span></label>
+            <label class="subject-option"><input type="checkbox" value="Mathematics"><span>Mathematics</span></label>
+            <label class="subject-option"><input type="checkbox" value="Physics"><span>Physics</span></label>
+            <label class="subject-option"><input type="checkbox" value="Chemistry"><span>Chemistry</span></label>
+            <label class="subject-option"><input type="checkbox" value="Biology"><span>Biology</span></label>
+            <label class="subject-option"><input type="checkbox" value="History"><span>History</span></label>
+            <label class="subject-option"><input type="checkbox" value="Geography"><span>Geography</span></label>
+            <label class="subject-option"><input type="checkbox" value="Politics"><span>Politics</span></label>
+            <label class="subject-option"><input type="checkbox" value="Economics"><span>Economics</span></label>
+            <label class="subject-option"><input type="checkbox" value="Indian Culture"><span>Indian
+                Culture</span></label>
+            <label class="subject-option"><input type="checkbox" value="General Knowledge"><span>General
+                Knowledge</span></label>
+            <label class="subject-option"><input type="checkbox" value="Science & Technology"><span>Science &
+                Technology</span></label>
+          </div>
+          <p id="setup-error" class="error-message" role="alert"></p>
+          <button class="primary-button" type="submit">Start Game <span>→</span></button>
+        </form>
+      </section>
+
+      <section id="history-screen" class="screen history-screen hidden">
+        <div class="history-card">
+          <div class="history-heading"><div><p class="eyebrow">YOUR ACCOUNT</p><h1>Game History</h1></div>
+            <button id="history-back-button" class="secondary-button" type="button">Back to Setup</button></div>
+          <p id="history-message" role="status">Loading your games…</p>
+          <ol id="history-list" class="history-list"></ol>
+        </div>
+      </section>
+
+      <section id="loading-screen" class="screen message-screen hidden" aria-live="polite">
+        <div class="message-card">
+          <div class="loading-orb"></div>
+          <h2>Preparing your quiz</h2>
+          <p>Connecting to the quiz service.</p><button id="loading-back-button"
+            class="secondary-button" type="button">Back to Setup</button>
+        </div>
+      </section>
+
+      <section id="game-screen" class="screen game-layout hidden">
+        <aside class="prize-ladder" id="prize-panel">
+          <h3>PRIZE LADDER</h3>
+          <ol id="prize-list"></ol>
+        </aside>
+        <div class="game-main">
+          <div class="game-meta">
+            <div class="meta-box"><small id="progress-caption">QUESTIONS</small><strong id="padav-label">1 / 15</strong>
+            </div>
+            <div class="timer-ring" id="timer-ring"><strong id="timer-label">30</strong><small>SECONDS</small></div>
+            <div class="meta-box align-right"><small>DIFFICULTY</small><strong id="difficulty-label">Easy</strong></div>
+          </div>
+          <div class="question-card">
+            <div class="question-kicker"><span id="question-subject">SUBJECT</span><span id="question-number">QUESTION
+                1</span></div>
+            <h2 id="question-text">Questions will appear here once the backend is connected.</h2>
+          </div>
+          <div id="lifeline-controls" class="lifeline-controls" aria-label="KBC lifelines">
+            <button class="secondary-button" type="button" data-lifeline="fifty_fifty">50:50</button>
+            <button class="secondary-button" type="button" data-lifeline="expert">Ask the Expert</button>
+            <button class="secondary-button" type="button" data-lifeline="double_dip">Double Dip</button>
+            <div class="flip-control"><span>Flip to</span>
+              <select id="flip-subject" aria-label="Replacement question subject"></select>
+              <button class="secondary-button" type="button" data-lifeline="flip">Flip</button>
+            </div>
+          </div>
+          <div id="answer-grid" class="answer-grid">
+            <button class="answer-button" disabled><b>A.</b> Waiting for question service</button>
+            <button class="answer-button" disabled><b>B.</b> Waiting for question service</button>
+            <button class="answer-button" disabled><b>C.</b> Waiting for question service</button>
+            <button class="answer-button" disabled><b>D.</b> Waiting for question service</button>
+          </div>
+          <div class="game-footer">
+            <p id="game-message">Loading question...</p>
+            <button id="next-question-button" class="primary-button hidden" type="button">Next Question</button>
+            <button id="quit-button" class="secondary-button" type="button">Quit Game</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="result-screen" class="screen result-screen hidden">
+        <div class="result-card">
+          <p class="eyebrow">SESSION COMPLETE</p>
+          <h1 id="result-title">Session Ended</h1>
+          <p id="result-summary"></p>
+          <div class="result-stats">
+            <div><small>FINAL PRIZE</small><strong id="result-prize">₹ 0</strong></div>
+            <div><small>CORRECT ANSWERS</small><strong id="result-correct">0 / 15</strong></div>
+          </div><button id="play-again-button" class="primary-button" type="button">Back to Setup ↻</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <dialog id="recovery-dialog" class="recovery-dialog">
+    <h2>Save your recovery code</h2>
+    <p>Keep this code somewhere safe. It can reset your password if you lose access to your account. It is shown only once each time it is generated.</p>
+    <code id="recovery-code-value"></code>
+    <div class="dialog-actions"><button id="copy-recovery-code" class="secondary-button" type="button">Copy Code</button>
+      <button id="close-recovery-dialog" class="primary-button" type="button">I saved it</button></div>
+  </dialog>
+  <audio id="background-music" src="assets/audio/cafe-ambience.m4a" loop preload="auto"></audio>
+  <script>
+    window.KBC_API_BASE = window.KBC_API_BASE || `http://${window.location.hostname || "localhost"}:8084/api`;
+  </script>
+  <script type="module" src="js/app.js?v=lifeline-polish-1"></script>
+</body>
+
+</html>

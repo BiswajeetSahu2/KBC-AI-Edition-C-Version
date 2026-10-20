@@ -1,0 +1,111 @@
+.result-screen {
+    display: grid;
+    place-items: center;
+    padding: 40px 0
+}
+
+.result-card {
+    width: min(100%, 540px);
+    text-align: center
+}
+
+.history-screen { padding: 30px 0; }
+.history-card {
+    width: min(100%, 850px);
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 38px);
+    border: 1px solid #9d7bff55;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #21174b, #100c2b)
+}
+.history-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px }
+.history-heading h1 { margin: 8px 0 20px; font-size: clamp(2rem, 5vw, 3.3rem) }
+.history-heading .eyebrow { margin: 0 }
+.history-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px }
+.history-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 18px;
+    padding: 14px 16px;
+    border: 1px solid #ffffff20;
+    border-radius: 10px;
+    background: #ffffff08
+}
+.history-item span { color: var(--muted); font-size: .82rem }
+
+.result-card h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    letter-spacing: -1.5px
+}
+
+.result-card>p:not(.eyebrow) {
+    color: #d0c9e8;
+    line-height: 1.6
+}
+
+.result-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 28px 0
+}
+
+.result-stats div {
+    padding: 18px 8px;
+    background: #ffffff08;
+    border: 1px solid #ffffff1a;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px
+}
+
+.result-stats strong {
+    color: var(--gold);
+    font-size: 1.3rem
+}
+
+body.game-active {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden
+}
+
+body.game-active .app-shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 12px;
+    padding-bottom: 12px
+}
+
+body.game-active main {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden
+}
+
+body.game-active .game-layout {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden
+}
+
+body.game-active .game-main {
+    overflow: hidden
+}
+
+html:fullscreen,
+html:fullscreen body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden
+}
+
+html:fullscreen .app-shell {
+    max-width: none;
+    width: 100%;
+    height: 100dvh;
+    min-height: 0
+}
