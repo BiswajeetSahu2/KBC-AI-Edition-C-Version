@@ -1,6 +1,6 @@
-# KBC AI Quiz
+# KBC AI EDITION
 
-A browser quiz game with a C backend and SQLite database. It includes KBC Challenge, 50-question Practice, Endless Practice, accounts, game history, profile pictures, recovery codes, and KBC lifelines.
+A browser-based quiz game with a C backend and SQLite database. It includes 50-question Practice, Endless Practice, accounts, game history, profile pictures, recovery codes, and KBC lifelines.
 
 ## Run on Windows
 
